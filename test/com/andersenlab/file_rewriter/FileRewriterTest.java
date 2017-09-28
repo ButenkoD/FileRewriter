@@ -1,8 +1,11 @@
+package com.andersenlab.file_rewriter;
+
 import org.junit.Test;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
+
 import static org.junit.Assert.assertEquals;
-import com.andersenlab.file_rewriter.*;
 
 public class FileRewriterTest {
     private final static String[] SOURCE_FILE_NAMES = new String[] {

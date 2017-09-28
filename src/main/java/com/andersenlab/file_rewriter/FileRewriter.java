@@ -23,10 +23,7 @@ public class FileRewriter {
         } catch (Exception e){
             logger.error(e.getMessage());
         } finally {
-            for (BufferedReader reader: readers) {
-                reader.close();
-            }
-            outputStream.close();
+            safelyCloseReadersAndWriter();
         }
     }
 
@@ -71,5 +68,22 @@ public class FileRewriter {
             readers.remove(emptyReader);
         }
         emptyReaders.clear();
+    }
+
+    private void safelyCloseReadersAndWriter() {
+        for (BufferedReader reader: readers) {
+            try {
+                reader.close();
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
+        }
+        try {
+            outputStream.close();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        readers.clear();
+        outputStream = null;
     }
 }
